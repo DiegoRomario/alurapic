@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { PhotosModule } from './photos/photos.module';
 import { AppRoutingModule } from './app.routing.module';
 import { ErrorsModule } from './errors/errors.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ErrorsModule } from './errors/errors.module';
     // NA VERDADE O MESMO DEVE SER IMPORTADO PELO MODULO QUE REALMENTE PRECISA EDLE
     , AppRoutingModule
     , ErrorsModule
+    , HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

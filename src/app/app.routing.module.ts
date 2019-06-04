@@ -4,8 +4,14 @@ import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { Routes, RouterModule } from '@angular/router'; // importado para usar o tipo routes e tipar minha constante de rotas
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
+import { SignInComponent } from './home/signin/signin.component';
+
 
 const routes: Routes = [
+    {
+        path: '',
+        component: SignInComponent
+    },
     {
         path: 'user/:userName',
         component: PhotoListComponent,
