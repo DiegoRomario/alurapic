@@ -24,6 +24,9 @@ export class SignInComponent implements OnInit {
             userName: ['', Validators.required],
             password: ['', Validators.required]
         });
+        if (this.platformDetectorService.isPlatformBrowser()) {
+            this.userNameInput.nativeElement.focus();
+        }
     }
 
     login() {
@@ -34,7 +37,7 @@ export class SignInComponent implements OnInit {
             .authenticate(username, password)
             .subscribe(
                 // () => this.router.navigateByUrl('user/' + username),
-                () => {console.log('teste'); this.router.navigate(['user', username])},
+                () => { console.log('teste'); this.router.navigate(['user', username]) },
                 err => {
                     this.loginForm.reset();
                     // tslint:disable-next-line: no-unused-expression

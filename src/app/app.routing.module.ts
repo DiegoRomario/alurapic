@@ -6,14 +6,27 @@ import { Routes, RouterModule } from '@angular/router'; // importado para usar o
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { SignInComponent } from './home/signin/signin.component';
+import { SignUpComponent } from './home/signup/signup.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: SignInComponent,
-        canActivate: [AuthGuard]
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                component: SignInComponent
+            },
+            {
+                path: 'signup',
+                component: SignUpComponent
+            }
+        ]
     },
+
     {
         path: 'user/:userName',
         component: PhotoListComponent,
@@ -32,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {useHash: true})],
     exports: [RouterModule] // EXPORTANDO O ROUTER MODULE PARA QUE NÃO SEJA
     // NECESSÁRIO IMPORTAR DIRETAMENTE NO MODULO QUE UTILIZA A ROTA, ASSIM BASTA UTILIZAR ESSE MODULO
 })
