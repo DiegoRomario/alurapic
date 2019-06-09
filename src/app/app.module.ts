@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { PhotosModule } from './photos/photos.module';
 import { AppRoutingModule } from './app.routing.module';
 import { ErrorsModule } from './errors/errors.module';
-import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
@@ -18,10 +17,10 @@ import { CoreModule } from './core/core.module';
     // HttpClientModule
     // IMPORTANDO O HTTP CLIENT PARA EXECUTAR COMANDOS HTTP
     // NA VERDADE O MESMO DEVE SER IMPORTADO PELO MODULO QUE REALMENTE PRECISA EDLE
-    , AppRoutingModule
+
     , ErrorsModule
-    , HomeModule
     , CoreModule
+    , AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

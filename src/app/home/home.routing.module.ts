@@ -1,0 +1,33 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router'; // importado para usar o tipo routes e tipar minha constante de rotas
+import { HomeComponent } from './home.component';
+import { AuthGuard } from '../core/auth/auth.guard';
+import { SignInComponent } from './signin/signin.component';
+import { SignUpComponent } from './signup/signup.component';
+
+
+const routes: Routes = [
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                component: SignInComponent
+            },
+            {
+                path: 'signup',
+                component: SignUpComponent
+            }
+        ]
+    },
+
+];
+
+@NgModule({
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule] // EXPORTANDO O ROUTER MODULE PARA QUE NÃO SEJA
+    // NECESSÁRIO IMPORTAR DIRETAMENTE NO MODULO QUE UTILIZA A ROTA, ASSIM BASTA UTILIZAR ESSE MODULO
+})
+export class HomeRoutingModule { }
