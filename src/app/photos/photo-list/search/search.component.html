@@ -1,13 +1,11 @@
 <div class="text-center mt-3 mb-3">
-    <form>
-        <div class="row">
-            <div class="col-4 offset-4 ">
-                <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input class="rounded form-control" type="search" placeholder="Search..." autofocus
-                        (keyup)="debounce.next($event.target.value)" [value]="value">
-                </div>
-            </div>
-        </div>
-    </form>
+  <form>
+    <div class="col-4 offset-4 ">
+      <div class="form-group has-search">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input class="rounded form-control" type="search" placeholder="Search..." autofocus
+          (keyup)="debounce.next($event.target.value)" [value]="value">
+      </div>
+    </div>
+  </form>
 </div>
