@@ -1,3 +1,5 @@
+import { UserService } from './../../core/user/user.service';
+import { AlertService } from './../../shared/components/alert/alert.service';
 import { PhotoService } from './../photo/photo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +18,9 @@ export class PhotoFormComponent implements OnInit {
   preview: string;
   constructor(private formBuilder: FormBuilder,
     private photoService: PhotoService,
-    private router: Router) { }
+    private router: Router,
+    private alertService: AlertService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -27,7 +31,7 @@ export class PhotoFormComponent implements OnInit {
     });
   }
 
-  handleFile (pfile: File) {
+  handleFile(pfile: File) {
     this.file = pfile;
     const reader = new FileReader();
     reader.onload = (event: any) => this.preview = event.target.result;
@@ -38,6 +42,9 @@ export class PhotoFormComponent implements OnInit {
     const description = this.photoForm.get('description').value;
     const allowComments = this.photoForm.get('allowComments').value;
     this.photoService.upload(description, allowComments, this.file)
-    .subscribe  (() => this.router.navigate(['']));
+      .subscribe(() => {
+        this.alertService.success('Upload complete!', true);
+        this.router.navigate(['/user', this.userService.getUserName()]);
+      });
   }
 }
