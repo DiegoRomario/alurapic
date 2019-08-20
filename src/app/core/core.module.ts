@@ -1,3 +1,6 @@
+import { ShowIfLoggedModule } from './../shared/directives/show-if-logged/show-if-logged.module';
+import { MenuModule } from './../shared/components/menu/menu.module';
+import { LoadingModule } from './../shared/components/loading/loading.module';
 import { AlertModule } from './../shared/components/alert/alert.module';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -9,7 +12,7 @@ import { RequestInterceptor } from './auth/request.interceptor';
 
 @NgModule({
     declarations: [HeaderComponent, FooterComponent],
-    imports: [CommonModule, RouterModule, AlertModule    ],
+    imports: [CommonModule, RouterModule, AlertModule, LoadingModule, MenuModule, ShowIfLoggedModule],
     exports: [HeaderComponent, FooterComponent],
     providers: [
         {
