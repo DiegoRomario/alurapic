@@ -1,29 +1,26 @@
-import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
-import { AuthGuard } from './core/auth/auth.guard';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
-import { Routes, RouterModule } from '@angular/router'; // importado para usar o tipo routes e tipar minha constante de rotas
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
-
-
-
+import { AuthGuard } from './core/auth/auth.guard';
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home'
+        redirectTo: 'home',
     },
     {
         path: 'home',
-        loadChildren: './home/home.module#HomeModule',
-        data: {
-            title: 'Home'
-        }
+        loadChildren: './home/home.module#HomeModule'
     },
     {
         path: 'user/:userName',
+        pathMatch: 'full',
         component: PhotoListComponent,
         resolve: {
             photos: PhotoListResolver
@@ -48,6 +45,13 @@ const routes: Routes = [
         }
     },
     {
+        path: 'error',
+        component: GlobalErrorComponent,
+        data: {
+            title: 'Error'
+        }
+    },
+    {
         path: 'not-found',
         component: NotFoundComponent,
         data: {
@@ -56,16 +60,15 @@ const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'not-found',
-        data: {
-            title: 'Not found'
-        }
+        redirectTo: 'not-found'
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
-    exports: [RouterModule] // EXPORTANDO O ROUTER MODULE PARA QUE NÃO SEJA
-    // NECESSÁRIO IMPORTAR DIRETAMENTE NO MODULO QUE UTILIZA A ROTA, ASSIM BASTA UTILIZAR ESSE MODULO
+    imports: [
+        RouterModule.forRoot(routes, { useHash: true } )
+    ],
+    exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
+

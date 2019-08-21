@@ -1,3 +1,4 @@
+import { userNamePassword } from './username-password.validator';
 import { SignUpService } from './signup.service';
 import { NewUser } from './new-user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -52,18 +53,22 @@ export class SignUpComponent implements OnInit {
                     Validators.maxLength(14)
                 ]
             ]
-        });
+        }, {
+                validator: userNamePassword
+            });
         if (this.platformDetectorService.isPlatformBrowser()) {
             this.emailInput.nativeElement.focus();
         }
     }
 
     signUp() {
-        const newUser = this.signupForm.getRawValue() as NewUser;
-        this.signUpService
-            .signUp(newUser)
-            .subscribe(() => this.router.navigate(['']),
-                err => console.log(err));
+        if (this.signupForm.valid && !this.signupForm.pending) {
+            const newUser = this.signupForm.getRawValue() as NewUser;
+            this.signUpService
+                .signUp(newUser)
+                .subscribe(() => this.router.navigate(['']),
+                    err => console.log(err));
+        }
     }
 }
 
