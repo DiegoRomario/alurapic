@@ -7,4 +7,7 @@ describe('Lower Case Validator', () => {
         console.log(resultado);
         expect(resultado).toBeTruthy();
     });
+    it('Dado um texto com primeira letra em caixa alta deve retornar falso', () => {
+        expect(isLowerCase('Ceni')).toBeFalsy();
+    })
 });
