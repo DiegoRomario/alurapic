@@ -10,7 +10,7 @@ import { PlatformDetectorService } from 'src/app/core/platform-detector/platform
 export class SignInComponent implements OnInit {
 
     loginForm: FormGroup;
-    @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
+    @ViewChild('userNameInput', { static: false }) userNameInput: ElementRef<HTMLInputElement>;
 
     constructor(private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
             .authenticate(username, password)
             .subscribe(
                 // () => this.router.navigateByUrl('user/' + username),
-                () => { console.log('teste'); this.router.navigate(['user', username]) },
+                () => { console.log('teste'); this.router.navigate(['user', username]); },
                 err => {
                     this.loginForm.reset();
                     // tslint:disable-next-line: no-unused-expression

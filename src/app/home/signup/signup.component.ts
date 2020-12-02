@@ -14,7 +14,7 @@ import { PlatformDetectorService } from 'src/app/core/platform-detector/platform
 })
 export class SignUpComponent implements OnInit {
     signupForm: FormGroup;
-    @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement>;
+    @ViewChild('emailInput', { static: false }) emailInput: ElementRef<HTMLInputElement>;
 
     constructor(private formBuilder: FormBuilder,
         private userNotTakenValidatorService: UserNotTakenValidatorService,
@@ -54,8 +54,8 @@ export class SignUpComponent implements OnInit {
                 ]
             ]
         }, {
-                validator: userNamePassword
-            });
+            validator: userNamePassword
+        });
         if (this.platformDetectorService.isPlatformBrowser()) {
             this.emailInput.nativeElement.focus();
         }
