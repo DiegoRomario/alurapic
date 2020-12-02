@@ -1,4 +1,4 @@
-import { isLowerCase } from "./lower-case.validator";
+import { isLowerCase } from './lower-case.validator';
 
 describe('Lower Case Validator', () => {
     it('Dado um texto em caixa baixa deve retornar verdadeiro', () => {
@@ -9,5 +9,5 @@ describe('Lower Case Validator', () => {
     });
     it('Dado um texto com primeira letra em caixa alta deve retornar falso', () => {
         expect(isLowerCase('Ceni')).toBeFalsy();
-    })
+    });
 });
