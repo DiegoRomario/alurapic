@@ -1,11 +1,13 @@
-import { TokenService } from '../token/token.service';
+import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 
 describe('User Service', () => {
     let service: UserService;
     beforeEach(() => {
-        const tokenService = new TokenService();
-        service = new UserService(tokenService);
+        TestBed.configureTestingModule({
+            providers: [UserService]
+        });
+        service = TestBed.get(UserService);
     });
 
     it('Dado nova instancia o valor não deve ser nulo ou indefinido', () => {
@@ -13,10 +15,22 @@ describe('User Service', () => {
     });
 
     it('Dado um token correto deve retornar dados do usuário', () => {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImFsdmFybyIsImVtYWlsIjoiYWx2YXJvQGdtYWlsLmNvbSIsImlhdCI6MTYwNjgxOTIzNSwiZXhwIjoxNjA2OTA1NjM1fQ.GgPqtBsWmW4jrvvUY89yzFbPCwqyufpdYBF9cU7pQrY';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZsYXZpbyIsImVtYWlsIjoiZmxhdmlvQGFsdXJhcGljLmNvbS5iciIsImlhdCI6MTYwNjkxMDIzNSwiZXhwIjoxNjA2OTk2NjM1fQ.UbyT7uX-KEgXqaob1F7mElNeJpF4SIWVYvPZ76CL3o4';
         service.setToken(token);
         expect(service.isLogged()).toBeTruthy();
-        expect(service.getUserName()).toBe('alvaro');
+        const nomeUsuario = 'flavio';
+        expect(service.getUserName()).toBe(nomeUsuario);
+        service.getUser().subscribe((user) => {
+            expect(user.name).toBe(nomeUsuario);
+        });
+    });
+
+    it('Ao efetuar logout deve limpar dados do usuário', () => {
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZsYXZpbyIsImVtYWlsIjoiZmxhdmlvQGFsdXJhcGljLmNvbS5iciIsImlhdCI6MTYwNjkxMDIzNSwiZXhwIjoxNjA2OTk2NjM1fQ.UbyT7uX-KEgXqaob1F7mElNeJpF4SIWVYvPZ76CL3o4';
+        service.setToken(token);
+        service.logout();
+        expect(service.isLogged()).toBeFalsy();
+        expect(service.getUserName()).toBeFalsy();
     });
 
 }
