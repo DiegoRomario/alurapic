@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { async, TestBed } from '@angular/core/testing'
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AlertModule } from 'src/app/shared/components/alert/alert.module';
@@ -9,6 +11,7 @@ import { HeaderComponent } from './header.component';
 
 describe('Header Component', () => {
     let component: HeaderComponent;
+    let router: Router;
     let userService: UserService;
     beforeEach(async(() => {
         // tslint:disable-next-line: no-unused-expression
@@ -26,6 +29,7 @@ describe('Header Component', () => {
 
     beforeEach(() => {
         userService = TestBed.get(UserService);
+        router = TestBed.get(Router);
         spyOn(userService, 'getUser').and.returnValue(of({
             name: 'Diego',
             email: 'diego@diego.com.br',
@@ -39,6 +43,14 @@ describe('Header Component', () => {
 
     it('Dado nova instancia o valor não deve ser nulo ou indefinido', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('Ao solicitar logout deve navegar para rota default', () => {
+        const spy = spyOn(userService, 'logout').and.returnValue(null);
+        const spyRouter = spyOn(router, 'navigate');
+        component.logout();
+        expect(spy).toHaveBeenCalled();
+        expect(spyRouter).toHaveBeenCalledWith(['']);
     });
 
 });
