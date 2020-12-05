@@ -15,7 +15,6 @@ export class ImmediateClickDirective implements OnInit {
     }
 
     ngOnInit(): void {
-        // tslint:disable-next-line: no-unused-expression
         this.platformDetectorService.isPlatformBrowser &&
         this.element.nativeElement.click();
     }

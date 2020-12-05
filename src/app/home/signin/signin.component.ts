@@ -40,7 +40,6 @@ export class SignInComponent implements OnInit {
                 () => { console.log('teste'); this.router.navigate(['user', username]); },
                 err => {
                     this.loginForm.reset();
-                    // tslint:disable-next-line: no-unused-expression
                     if (this.platformDetectorService.isPlatformBrowser()) {
                         this.userNameInput.nativeElement.focus();
                     }

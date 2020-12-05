@@ -1,5 +1,4 @@
-import { Route } from '@angular/compiler/src/core';
-import { async, TestBed } from '@angular/core/testing'
+import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -14,7 +13,6 @@ describe('Header Component', () => {
     let router: Router;
     let userService: UserService;
     beforeEach(async(() => {
-        // tslint:disable-next-line: no-unused-expression
         TestBed.configureTestingModule({
             declarations: [HeaderComponent],
             providers: [UserService],
@@ -24,7 +22,7 @@ describe('Header Component', () => {
                 AlertModule,
                 LoadingModule
             ]
-        }).compileComponents;
+        }).compileComponents();
     }));
 
     beforeEach(() => {
