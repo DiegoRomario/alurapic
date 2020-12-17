@@ -1,5 +1,5 @@
-import { SigninPage } from './pageObjects/signin.po';
-import { SignUpPage } from './pageObjects/signup.po';
+import { SigninPage } from './pageObjects/home/signin.po';
+import { SignUpPage } from './pageObjects/home/signup.po';
 
 describe('Testando tela home', () => {
   let signinPage: SigninPage;
